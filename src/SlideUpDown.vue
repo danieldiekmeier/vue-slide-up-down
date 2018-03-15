@@ -31,12 +31,31 @@
     data: () => ({
       maxHeight: 0
     }),
+    
+    mounted () {
+      this.render()
+    },
 
     watch: {
-      active (active) {
-        const { container } = this.$refs
+      active () {
+        this.render()
+      }
+    },
 
-        if (active) {
+    computed: {
+      style () {
+        return {
+          height: this.maxHeight + 'px',
+          'transition-duration': this.duration + 'ms'
+        }
+      }
+    },
+    
+    methods: {
+      render () {
+        const { container } = this.$refs
+        
+        if (this) {
           const style = container.getAttribute('style')
           container.removeAttribute('style')
           this.maxHeight = container.offsetHeight
@@ -46,15 +65,6 @@
           container.offsetHeight
         } else {
           this.maxHeight = 0
-        }
-      }
-    },
-
-    computed: {
-      style () {
-        return {
-          height: this.maxHeight + 'px',
-          'transition-duration': this.duration + 'ms'
         }
       }
     }
