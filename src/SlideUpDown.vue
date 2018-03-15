@@ -55,7 +55,7 @@
       render () {
         const { container } = this.$refs
         
-        if (this) {
+        if (this.active) {
           const style = container.getAttribute('style')
           container.removeAttribute('style')
           this.maxHeight = container.offsetHeight
