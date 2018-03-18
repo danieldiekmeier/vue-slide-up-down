@@ -2,6 +2,8 @@
 
 Like jQuery's [`slideUp`](http://api.jquery.com/slideup/) / [`slideDown`](http://api.jquery.com/slidedown/), but for [Vue](vuejs.org)!
 
+Demo: https://codepen.io/danieldiekmeier/pen/YapGWq
+
 ## Installation
 
 ```sh
