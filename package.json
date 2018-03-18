@@ -1,0 +1,32 @@
+{
+  "name": "vue-slide-up-down",
+  "version": "1.0.0",
+  "description": "Like jQuery's slideUp/slideDown, but for Vue!",
+  "source": "src/slide-up-down.js",
+  "amdName": "VueSlideUpDown",
+  "main": "dist/vue-slide-up-down.js",
+  "umd:main": "dist/vue-slide-up-down.umd.js",
+  "module": "dist/vue-slide-up-down.m.js",
+  "scripts": {
+    "build": "microbundle",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danieldiekmeier/vue-slide-up-down.git"
+  },
+  "keywords": [
+    "vue",
+    "slideup",
+    "slidedown"
+  ],
+  "author": "Daniel Diekmeier",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/danieldiekmeier/vue-slide-up-down/issues"
+  },
+  "homepage": "https://github.com/danieldiekmeier/vue-slide-up-down#readme",
+  "devDependencies": {
+    "microbundle": "^0.4.4"
+  }
+}

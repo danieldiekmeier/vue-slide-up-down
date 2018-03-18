@@ -4,13 +4,33 @@ Like jQuery's [`slideUp`](http://api.jquery.com/slideup/) / [`slideDown`](http:/
 
 ## Installation
 
-For now: Put [this file](https://raw.githubusercontent.com/danieldiekmeier/vue-slide-up-down/master/src/SlideUpDown.vue?token=ACAFHsn9ZlFUeXemiXVhMVCjNcvfW8LRks5Y2nfYwA%3D%3D) into your project.
+```sh
+npm i vue-slide-up-down
+```
 
-Maybe I'll put this on npm soon? I don't know.
+Usage with Webpack or other module bundlers:
+
+```js
+import SlideUpDown from 'vue-slide-up-down'
+# or
+const SlideUpDown = require('vue-slide-up-down')
+
+Vue.component('vue-slide-up-down', VueSlideUpDown)
+```
+
+Or use the UMD build directly in your browser:
+
+```html
+<script type="text/javascript" src="node_modules/vuejs/dist/vue.min.js"></script>
+<script type="text/javascript" src="node_modules/vue-slide-up-down/dist/vue-slide-up-down.umd.js"></script>
+<script type="text/javascript">
+  Vue.component('vue-slide-up-down', VueSlideUpDown);
+</script>
+```
 
 ## Usage
 
-The component takes two props: 
+The component takes two props:
 
 - `active` (Boolean): Whether to show the component (`true`) or not (`false`)
 - `duration` (Number): How long the animation is supposed to be, in milliseconds. Defaults to `500`.
