@@ -10,7 +10,8 @@ export default {
   },
 
   data: () => ({
-    maxHeight: 0
+    maxHeight: 0,
+    offsetHeight: 0
   }),
 
   render (h) {
@@ -56,7 +57,7 @@ export default {
         container.setAttribute('style', style)
 
         // call this explicitely to force a new layout
-        container.offsetHeight
+        this.offsetHeight = container.offsetHeight
       } else {
         this.maxHeight = 0
       }
