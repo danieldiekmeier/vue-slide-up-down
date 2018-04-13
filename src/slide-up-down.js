@@ -19,7 +19,7 @@ export default {
       'div',
       {
         style: this.style,
-        ref: 'container',
+        ref: 'container'
       },
       this.$slots.default
     )
@@ -27,6 +27,12 @@ export default {
 
   mounted () {
     this.render()
+
+    window.addEventListener('resize', this.render)
+  },
+
+  destroyed () {
+    window.removeEventListener('resize', this.render)
   },
 
   watch: {
