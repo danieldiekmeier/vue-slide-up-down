@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+  <script type="text/javascript" src="../dist/vue-slide-up-down.umd.js"></script>
+
+  <script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', () => {
+      Vue.component('vue-slide-up-down', VueSlideUpDown);
+
+      new Vue({
+        el: '#app',
+
+        data: () => ({
+          active: false,
+          show: true
+        }),
+
+        methods: {
+          toggle () {
+            this.active = !this.active
+          },
+
+          toggleShow () {
+            this.show = !this.show
+          }
+        }
+      })
+    })
+  </script>
+
+  <style type="text/css">
+    * {
+      margin: 0;
+      padding: 0;
+      font-size: 1em;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: sans-serif;
+    }
+
+    .Button {
+      display: block;
+      width: 50%;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 1em;
+      border: 0;
+      background-color: gray;
+    }
+
+    .AccordeonWrapper {
+      background-color: red;
+    }
+
+    .Accordeon {
+      display: block;
+      width: 50%;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 1em;
+      border: 0;
+      background-color: lightgray;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <div v-if="show">
+      <button @click="toggle" class="Button">Toggle</button>
+
+      <vue-slide-up-down :active="active" class="AccordeonWrapper">
+        <div class="Accordeon">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut, consequatur ut magnam, quos possimus, velit quam mollitia voluptate adipisci reiciendis sapiente accusamus ullam ab voluptatem laborum non! Accusamus, ullam, voluptatum.
+        </div>
+      </vue-slide-up-down>
+
+      <br>
+    </div>
+
+    <button class="Button" @click="toggleShow">Toggle Destruction</button>
+  </div>
+</body>
+</html>
