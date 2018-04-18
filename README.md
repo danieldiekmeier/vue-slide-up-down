@@ -36,6 +36,8 @@ The component takes two props:
 
 - `active` (Boolean): Whether to show the component (`true`) or not (`false`)
 - `duration` (Number): How long the animation is supposed to be, in milliseconds. Defaults to `500`.
+- `timing-function` (String): What transition-timing-function should be used. Defaults to `ease`.
+- `appear` (Boolean): Wether the initial appear of component should be animated. Defaults to `true`.
 
 ## Example
 

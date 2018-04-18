@@ -3,6 +3,14 @@ export default {
 
   props: {
     active: Boolean,
+    timingFunction: {
+      type: String,
+      default: 'ease',
+    },
+    appear: {
+      type: Boolean,
+      default: true,
+    },
     duration: {
       type: Number,
       default: 500
@@ -10,6 +18,7 @@ export default {
   },
 
   data: () => ({
+    appeared: false,
     maxHeight: 0,
     offsetHeight: 0
   }),
@@ -24,13 +33,16 @@ export default {
       this.$slots.default
     )
   },
-
   mounted () {
     this.render()
 
     window.addEventListener('resize', this.render)
+    
+    // wait (next-tick) till view has been rendered.
+    setTimeout(() => {
+      this.appeared = true;
+    }, 0);
   },
-
   destroyed () {
     window.removeEventListener('resize', this.render)
   },
@@ -45,9 +57,10 @@ export default {
     style () {
       return {
         overflow: 'hidden',
-        'transition-property': 'all',
+        'transition-property': (this.appear || this.appeared) ? 'all' : 'none',
         height: this.maxHeight + 'px',
-        'transition-duration': this.duration + 'ms'
+        'transition-duration': this.duration + 'ms',
+        'transition-timing-function': this.timingFunction
       }
     }
   },
