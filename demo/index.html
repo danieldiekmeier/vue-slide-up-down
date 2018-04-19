@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Document</title>
+  <title>Vue Slide Up Down Example</title>
   <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
   <script type="text/javascript" src="../dist/vue-slide-up-down.umd.js"></script>
 
@@ -14,7 +14,7 @@
         el: '#app',
 
         data: () => ({
-          active: false,
+          active: true,
           show: true
         }),
 
@@ -55,6 +55,8 @@
 
     .AccordeonWrapper {
       background-color: red;
+
+      transition-timing-function: cubic-bezier(0.195, 1.650, 0.435, -0.600);
     }
 
     .Accordeon {
