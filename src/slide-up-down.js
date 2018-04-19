@@ -11,7 +11,8 @@ export default {
 
   data: () => ({
     maxHeight: 0,
-    offsetHeight: 0
+    offsetHeight: 0,
+    isMounted: false
   }),
 
   render (h) {
@@ -29,6 +30,10 @@ export default {
     this.layout()
 
     window.addEventListener('resize', this.layout)
+
+    setTimeout(() => {
+      this.isMounted = true
+    }, 0)
   },
 
   destroyed () {
@@ -45,8 +50,8 @@ export default {
     style () {
       return {
         overflow: 'hidden',
-        'transition-property': 'all',
-        height: this.maxHeight + 'px',
+        'transition-property': 'height',
+        height: this.isMounted ? this.maxHeight + 'px' : 'auto',
         'transition-duration': this.duration + 'ms'
       }
     }
