@@ -37,8 +37,6 @@ The component takes two props:
 - `active` (Boolean): Whether to show the component (`true`) or not (`false`)
 - `duration` (Number): How long the animation is supposed to be, in milliseconds. Defaults to `500`.
 
-## Example
-
 ```html
 <div class="MyContent">
   <h1>Always show this</h1>
@@ -46,6 +44,22 @@ The component takes two props:
     Only show this if "active” is true
   </vue-slide-up-down>
 </div>
+```
+
+### Custom `transition-timing-function`
+
+If you want to use a different timing function, add some CSS for your `<vue-slide-up-down>` element. (See `demo/index.html` for a full example.)
+
+```html
+<style>
+  .wobbly-accordeon {
+    transition-timing-function: cubic-bezier(0.195, 1.650, 0.435, -0.600);
+  }
+</style>
+
+<vue-slide-up-down class="wobbly-accordeon">
+  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta omnis velit ab culpa, officia, unde nesciunt temporibus cum reiciendis distinctio.
+</vue-slide-up-down>
 ```
 
 ## Also
