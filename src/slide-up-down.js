@@ -26,18 +26,18 @@ export default {
   },
 
   mounted () {
-    this.render()
+    this.layout()
 
-    window.addEventListener('resize', this.render)
+    window.addEventListener('resize', this.layout)
   },
 
   destroyed () {
-    window.removeEventListener('resize', this.render)
+    window.removeEventListener('resize', this.layout)
   },
 
   watch: {
     active () {
-      this.render()
+      this.layout()
     }
   },
 
@@ -53,7 +53,7 @@ export default {
   },
 
   methods: {
-    render () {
+    layout () {
       const { container } = this.$refs
 
       if (this.active) {
