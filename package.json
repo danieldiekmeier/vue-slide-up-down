@@ -8,8 +8,7 @@
   "umd:main": "dist/vue-slide-up-down.umd.js",
   "module": "dist/vue-slide-up-down.m.js",
   "scripts": {
-    "build": "microbundle",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "microbundle"
   },
   "repository": {
     "type": "git",
