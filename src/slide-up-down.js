@@ -6,6 +6,10 @@ export default {
     duration: {
       type: Number,
       default: 500
+    },
+    tag: {
+      type: String,
+      default: 'div'
     }
   },
 
@@ -17,7 +21,7 @@ export default {
 
   render (h) {
     return h(
-      'div',
+      this.tag,
       {
         style: this.style,
         ref: 'container'

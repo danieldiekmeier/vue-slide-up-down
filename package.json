@@ -21,7 +21,7 @@
     "slidedown"
   ],
   "author": "Daniel Diekmeier",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/danieldiekmeier/vue-slide-up-down/issues"
   },

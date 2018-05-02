@@ -36,6 +36,7 @@ The component takes two props:
 
 - `active` (Boolean): Whether to show the component (`true`) or not (`false`)
 - `duration` (Number): How long the animation is supposed to be, in milliseconds. Defaults to `500`.
+- `tag` (String): Which HTML tag to use for the wrapper element. Defaults to `div`.
 
 ```html
 <div class="MyContent">
