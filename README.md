@@ -13,9 +13,9 @@ npm i vue-slide-up-down
 Usage with Webpack or other module bundlers:
 
 ```js
-import SlideUpDown from 'vue-slide-up-down'
+import VueSlideUpDown from 'vue-slide-up-down'
 // or
-const SlideUpDown = require('vue-slide-up-down')
+const VueSlideUpDown = require('vue-slide-up-down')
 
 Vue.component('vue-slide-up-down', VueSlideUpDown)
 ```
