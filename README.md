@@ -65,4 +65,4 @@ If you want to use a different timing function, add some CSS for your `<vue-slid
 
 ## Also
 
-This currently works by showing the element, measuring the height, setting the height back to 0, and then CSS-transitioning to the target height. This works _okay_, but is not very performant. If you have other ideas how to make this extremely smooth and good looking, feel free to send issues or pull requests.
+This currently works by measuring the `offsetHeight` and then CSS-transitioning to the target height or back to `0px`. This works _okay_, but is not very performant. If you have other ideas how to make this extremely smooth and good looking, feel free to send issues or pull requests.
