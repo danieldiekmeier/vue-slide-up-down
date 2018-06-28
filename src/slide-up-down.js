@@ -6,61 +6,66 @@ export default {
     duration: {
       type: Number,
       default: 500
+    },
+    tag: {
+      type: String,
+      default: 'div'
     }
   },
 
   data: () => ({
-    maxHeight: 0,
-    offsetHeight: 0
+    scrollHeight: 0,
+    isMounted: false
   }),
+
+  watch: {
+    active() {
+      this.layout()
+    }
+  },
 
   render (h) {
     return h(
-      'div',
+      this.tag,
       {
         style: this.style,
-        ref: 'container',
+        ref: 'container'
       },
       this.$slots.default
     )
   },
 
   mounted () {
-    this.render()
+    window.addEventListener('resize', this.layout)
+
+    this.layout()
+
+    this.$nextTick(() => {
+      this.isMounted = true
+    })
   },
 
-  watch: {
-    active () {
-      this.render()
-    }
+  destroyed () {
+    window.removeEventListener('resize', this.layout)
   },
 
   computed: {
     style () {
+      const heightSize = this.active ? this.scrollHeight : 0
+
       return {
         overflow: 'hidden',
-        'transition-property': 'all',
-        height: this.maxHeight + 'px',
+        'transition-property': 'height',
+        height: this.isMounted ? heightSize + 'px' : 'auto',
         'transition-duration': this.duration + 'ms'
       }
     }
   },
 
   methods: {
-    render () {
+    layout () {
       const { container } = this.$refs
-
-      if (this.active) {
-        const style = container.getAttribute('style')
-        container.removeAttribute('style')
-        this.maxHeight = container.offsetHeight
-        container.setAttribute('style', style)
-
-        // call this explicitely to force a new layout
-        this.offsetHeight = container.offsetHeight
-      } else {
-        this.maxHeight = 0
-      }
+      this.scrollHeight = container.scrollHeight
     }
   }
 }
