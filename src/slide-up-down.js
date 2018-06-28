@@ -18,6 +18,12 @@ export default {
     isMounted: false
   }),
 
+  watch: {
+    active() {
+      this.layout()
+    }
+  },
+
   render (h) {
     return h(
       this.tag,
