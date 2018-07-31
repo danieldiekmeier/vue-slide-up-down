@@ -32,7 +32,7 @@ Or use the UMD build directly in your browser:
 
 ## Usage
 
-The component takes two props:
+The component takes three props:
 
 - `active` (Boolean): Whether to show the component (`true`) or not (`false`)
 - `duration` (Number): How long the animation is supposed to be, in milliseconds. Defaults to `500`.
