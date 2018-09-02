@@ -5,7 +5,11 @@ export default {
     active: Boolean,
     duration: {
       type: Number,
-      default: 500
+      default: 300
+    },
+    easing: {
+      type: String,
+      default: 'cubic-bezier(0.23, 1, 0.32, 1)' // ease out quint
     },
     tag: {
       type: String,
@@ -15,12 +19,16 @@ export default {
 
   data: () => ({
     scrollHeight: 0,
-    isMounted: false
+    isMounted: false,
+    timeoutId: null
   }),
 
   watch: {
     active() {
-      this.layout()
+      // allow vue update for async events to take effect
+      this.timeoutId = setTimeout(() => {
+        this.layout()
+      }, 20)
     }
   },
 
@@ -46,6 +54,7 @@ export default {
   },
 
   destroyed () {
+    clearTimeout(this.timeoutId)
     window.removeEventListener('resize', this.layout)
   },
 
@@ -57,7 +66,8 @@ export default {
         overflow: 'hidden',
         'transition-property': 'height',
         height: this.isMounted ? heightSize + 'px' : 'auto',
-        'transition-duration': this.duration + 'ms'
+        'transition-duration': this.duration + 'ms',
+        'transition-timing-function': this.easing
       }
     }
   },
