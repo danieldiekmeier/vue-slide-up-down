@@ -32,10 +32,11 @@ Or use the UMD build directly in your browser:
 
 ## Usage
 
-The component takes three props:
+The component takes four props:
 
 - `active` (Boolean): Whether to show the component (`true`) or not (`false`)
-- `duration` (Number): How long the animation is supposed to be, in milliseconds. Defaults to `500`.
+- `duration` (Number): How long the animation is supposed to be, in milliseconds. Defaults to `300`.
+- `easing` (String): The easing technique. Default is cubic-bezier(0.23, 1, 0.32, 1) which is (Ease Out Quint).
 - `tag` (String): Which HTML tag to use for the wrapper element. Defaults to `div`.
 
 ```html
