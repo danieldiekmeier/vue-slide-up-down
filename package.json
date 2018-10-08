@@ -26,6 +26,6 @@
   },
   "homepage": "https://github.com/danieldiekmeier/vue-slide-up-down#readme",
   "devDependencies": {
-    "microbundle": "^0.4.4"
+    "microbundle": "^0.6.0"
   }
 }
