@@ -1,4 +1,4 @@
-# vue-slide-up-down
+# slide-up-down
 
 Like jQuery's [`slideUp`](http://api.jquery.com/slideup/) / [`slideDown`](http://api.jquery.com/slidedown/), but for [Vue](vuejs.org)!
 
@@ -7,26 +7,26 @@ Demo: https://codepen.io/danieldiekmeier/pen/YapGWq
 ## Installation
 
 ```sh
-npm i vue-slide-up-down
+npm i slide-up-down
 ```
 
 Usage with Webpack or other module bundlers:
 
 ```js
-import VueSlideUpDown from 'vue-slide-up-down'
+import SlideUpDown from 'vue-slide-up-down'
 // or
-const VueSlideUpDown = require('vue-slide-up-down')
+const SlideUpDown = require('vue-slide-up-down')
 
-Vue.component('vue-slide-up-down', VueSlideUpDown)
+Vue.component('slide-up-down', SlideUpDown)
 ```
 
-Or use the UMD build directly in your browser:
+Or use the UMD build directly in your browser (the component is provided as `window.VueSlideUpDown`).
 
 ```html
 <script type="text/javascript" src="node_modules/vuejs/dist/vue.min.js"></script>
 <script type="text/javascript" src="node_modules/vue-slide-up-down/dist/vue-slide-up-down.umd.js"></script>
 <script type="text/javascript">
-  Vue.component('vue-slide-up-down', VueSlideUpDown);
+  Vue.component('slide-up-down', VueSlideUpDown);
 </script>
 ```
 
@@ -41,15 +41,16 @@ The component takes three props:
 ```html
 <div class="MyContent">
   <h1>Always show this</h1>
-  <vue-slide-up-down :active="active" :duration="1000">
+
+  <slide-up-down :active="active" :duration="1000">
     Only show this if "active” is true
-  </vue-slide-up-down>
+  </slide-up-down>
 </div>
 ```
 
 ### Custom `transition-timing-function`
 
-If you want to use a different timing function, add some CSS for your `<vue-slide-up-down>` element. (See `demo/index.html` for a full example.)
+If you want to use a different timing function, add some CSS for your `<slide-up-down>` element. (See `demo/index.html` for a full example.)
 
 ```html
 <style>
@@ -58,11 +59,28 @@ If you want to use a different timing function, add some CSS for your `<vue-slid
   }
 </style>
 
-<vue-slide-up-down class="wobbly-accordeon">
+<slide-up-down class="wobbly-accordeon">
   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta omnis velit ab culpa, officia, unde nesciunt temporibus cum reiciendis distinctio.
-</vue-slide-up-down>
+</slide-up-down>
 ```
 
-## Also
+### Listening for Events
 
-This currently works by measuring the `offsetHeight` and then CSS-transitioning to the target height or back to `0px`. This works _okay_, but is not very performant. If you have other ideas how to make this extremely smooth and good looking, feel free to send issues or pull requests.
+To keep the codebase _small, but powerful_™, this package doesn't provide hooks for `transitionend`, `transitionstart` or other events, but instead provides direct access to the DOM Element that does the actual sliding up and down:
+
+Add a [`ref`](https://vuejs.org/v2/api/#vm-refs) to your SlideUpDown-Element:
+
+```html
+<SlideUpDown ref="upDown">My Content</SlideUpDown>
+```
+
+And add the event listener you want:
+
+```js
+mounted () {
+  const el = this.$refs.upDown.el
+  el.addEventListener('transitionend', () => {
+    console.log('transition ended')
+  })
+}
+```

@@ -19,7 +19,7 @@ export default {
   }),
 
   watch: {
-    active() {
+    active () {
       this.layout()
     }
   },
@@ -59,13 +59,16 @@ export default {
         height: this.isMounted ? heightSize + 'px' : 'auto',
         'transition-duration': this.duration + 'ms'
       }
+    },
+
+    el () {
+      return this.$refs.container
     }
   },
 
   methods: {
     layout () {
-      const { container } = this.$refs
-      this.scrollHeight = container.scrollHeight
+      this.scrollHeight = this.el.scrollHeight
     }
   }
 }
