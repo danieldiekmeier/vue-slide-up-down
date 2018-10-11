@@ -48,6 +48,26 @@ The component takes three props:
 </div>
 ```
 
+
+### Trigger a (re-)layout
+
+If you need to trigger a relayout (for example if your content changed), you can call the `.layout()` method on your slide-up-down instance:
+
+```html
+<slide-up-down ref="upDown">{{ myContent }}</slide-up-down>
+```
+
+And in your parent component:
+
+```js
+watch: {
+  myContent () {
+    this.$refs.upDown.layout()
+  }
+}
+```
+
+
 ### Custom `transition-timing-function`
 
 If you want to use a different timing function, add some CSS for your `<slide-up-down>` element. (See `demo/index.html` for a full example.)
