@@ -1,4 +1,4 @@
-# slide-up-down
+# vue-slide-up-down
 
 Like jQuery's [`slideUp`](http://api.jquery.com/slideup/) / [`slideDown`](http://api.jquery.com/slidedown/), but for [Vue](vuejs.org)!
 
@@ -7,7 +7,7 @@ Demo: https://codepen.io/danieldiekmeier/pen/YapGWq
 ## Installation
 
 ```sh
-npm i slide-up-down
+npm i vue-slide-up-down
 ```
 
 Usage with Webpack or other module bundlers:

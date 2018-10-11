@@ -8,7 +8,7 @@
 
   <script type="text/javascript">
     document.addEventListener('DOMContentLoaded', () => {
-      Vue.component('vue-slide-up-down', VueSlideUpDown);
+      Vue.component('slide-up-down', VueSlideUpDown);
 
       new Vue({
         el: '#app',
@@ -76,11 +76,11 @@
     <div v-if="show">
       <button @click="toggle" class="Button">Toggle</button>
 
-      <vue-slide-up-down :active="active" class="AccordeonWrapper">
+      <slide-up-down :active="active" class="AccordeonWrapper">
         <div class="Accordeon">
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut, consequatur ut magnam, quos possimus, velit quam mollitia voluptate adipisci reiciendis sapiente accusamus ullam ab voluptatem laborum non! Accusamus, ullam, voluptatum.
         </div>
-      </vue-slide-up-down>
+      </slide-up-down>
 
       <br>
     </div>
