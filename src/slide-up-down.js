@@ -26,10 +26,7 @@ export default {
   render(h) {
     return h(
       this.tag,
-      {
-        style: this.style,
-        ref: 'container',
-      },
+      { style: this.style },
       this.$slots.default
     );
   },
