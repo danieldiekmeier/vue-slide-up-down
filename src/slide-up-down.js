@@ -4,71 +4,95 @@ export default {
   props: {
     active: Boolean,
     duration: {
-      type: Number,
-      default: 500
+      default: 500,
     },
     tag: {
       type: String,
-      default: 'div'
-    }
+      default: 'div',
+    },
+    closedHeight: {
+      default: 0,
+    },
   },
 
-  data: () => ({
-    scrollHeight: 0,
-    isMounted: false
-  }),
-
-  watch: {
-    active () {
-      this.layout()
-    }
+  data() {
+    return {
+      maxHeight: this.closedHeight,
+      opened: false,
+      isInitialized: false,
+    };
   },
 
-  render (h) {
+  render(h) {
     return h(
       this.tag,
       {
         style: this.style,
-        ref: 'container'
+        ref: 'container',
       },
       this.$slots.default
-    )
+    );
   },
 
-  mounted () {
-    window.addEventListener('resize', this.layout)
-
-    this.layout()
-
-    this.$nextTick(() => {
-      this.isMounted = true
-    })
+  mounted() {
+    window.addEventListener('resize', this.layout);
   },
 
-  destroyed () {
-    window.removeEventListener('resize', this.layout)
+  destroyed() {
+    window.removeEventListener('resize', this.layout);
+  },
+
+  watch: {
+    active() {
+      this.layout();
+    },
   },
 
   computed: {
-    style () {
-      const heightSize = this.active ? this.scrollHeight : 0
-
-      return {
+    style() {
+      if (this.opened) return {};
+      const baseStyle = {
         overflow: 'hidden',
-        'transition-property': 'height',
-        height: this.isMounted ? heightSize + 'px' : 'auto',
-        'transition-duration': this.duration + 'ms'
-      }
-    },
+        'max-height': `${this.maxHeight}px`,
+      };
 
-    el () {
-      return this.$refs.container
-    }
+      if (this.isInitialized) {
+        return Object.assign({}, baseStyle, {
+          'transition-property': 'max-height',
+          'transition-duration': `${this.duration}ms`,
+        });
+      }
+      return baseStyle;
+    },
   },
 
   methods: {
-    layout () {
-      this.scrollHeight = this.el.scrollHeight
-    }
-  }
-}
+    layout() {
+      if (this.active) {
+        this.isInitialized = true;
+        this.maxHeight = this.$el.scrollHeight;
+        setTimeout(() => {
+          if (this.active) {
+            this.opened = true;
+          }
+        }, this.duration);
+      } else {
+        if (!this.isInitialized) {
+          this.isInitialized = true;
+          return;
+        }
+        this.opened = false;
+        this.maxHeight = this.$el.scrollHeight;
+        this.$nextTick(() => {
+          setTimeout(() => {
+            if (!this.active) {
+              if (this.maxHeight > this.closedHeight) {
+                this.maxHeight = this.closedHeight;
+              }
+            }
+          }, 1);
+        });
+      }
+    },
+  },
+};
