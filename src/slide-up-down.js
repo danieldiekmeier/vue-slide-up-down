@@ -2,11 +2,15 @@ export default {
   name: 'SlideUpDown',
 
   props: {
-    active: Boolean,
+    visible: {
+      type: Boolean
+    },
+
     duration: {
       type: Number,
       default: 500
     },
+
     tag: {
       type: String,
       default: 'div'
@@ -15,27 +19,28 @@ export default {
 
   data: () => ({
     scrollHeight: 0,
+    isAnimating: false,
     isMounted: false
   }),
 
   watch: {
-    active () {
+    visible() {
       this.layout()
+      this.setAnimationState()
     }
   },
 
-  render (h) {
+  render(h) {
     return h(
-      this.tag,
-      {
-        style: this.style,
-        ref: 'container'
-      },
-      this.$slots.default
+        this.tag,
+        {
+          style: this.style
+        },
+        this.$slots.default
     )
   },
 
-  mounted () {
+  mounted() {
     window.addEventListener('resize', this.layout)
 
     this.layout()
@@ -45,30 +50,44 @@ export default {
     })
   },
 
-  destroyed () {
+  destroyed() {
     window.removeEventListener('resize', this.layout)
   },
 
   computed: {
-    style () {
-      const heightSize = this.active ? this.scrollHeight : 0
-
-      return {
-        overflow: 'hidden',
-        'transition-property': 'height',
-        height: this.isMounted ? heightSize + 'px' : 'auto',
-        'transition-duration': this.duration + 'ms'
-      }
+    heightUnit() {
+      return this.isMounted ? 'px' : 'auto'
     },
 
-    el () {
-      return this.$refs.container
+    heightSize() {
+      return this.visible ? this.scrollHeight : 0
+    },
+
+    overflowValue() {
+      return (!this.isAnimating && this.visible) ? 'inherit' : 'hidden'
+    },
+
+    style() {
+      return {
+        overflow: this.overflowValue,
+        'transition-property': 'height',
+        height: `${this.heightSize}${this.heightUnit}`,
+        'transition-duration': `${this.duration}ms`
+      }
     }
   },
 
   methods: {
-    layout () {
-      this.scrollHeight = this.el.scrollHeight
+    layout() {
+      this.scrollHeight = this.$el.scrollHeight
+    },
+
+    setAnimationState() {
+      this.isAnimating = true
+
+      setTimeout(() => {
+        this.isAnimating = false
+      }, this.duration)
     }
   }
 }
