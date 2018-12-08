@@ -14,13 +14,16 @@ export default {
   },
 
   data: () => ({
-    scrollHeight: 0,
-    isMounted: false
+    style: {}
   }),
 
   watch: {
     active () {
-      this.layout()
+      if (this.active) {
+        this.setHeight('0px', () => this.el.scrollHeight + 'px')
+      } else {
+        this.setHeight(this.el.scrollHeight + 'px', () => '0px')
+      }
     }
   },
 
@@ -36,39 +39,36 @@ export default {
   },
 
   mounted () {
-    window.addEventListener('resize', this.layout)
-
-    this.layout()
-
-    this.$nextTick(() => {
-      this.isMounted = true
+    this.el.addEventListener('transitionend', () => {
+      if (this.active) {
+        this.style = {}
+      } else {
+        this.style = { display: 'none' }
+      }
     })
   },
 
-  destroyed () {
-    window.removeEventListener('resize', this.layout)
-  },
-
   computed: {
-    style () {
-      const heightSize = this.active ? this.scrollHeight : 0
-
-      return {
-        overflow: 'hidden',
-        'transition-property': 'height',
-        height: this.isMounted ? heightSize + 'px' : 'auto',
-        'transition-duration': this.duration + 'ms'
-      }
-    },
-
     el () {
       return this.$refs.container
     }
   },
 
   methods: {
-    layout () {
-      this.scrollHeight = this.el.scrollHeight
+    setHeight (temp, afterRelayout) {
+      this.style = { height: temp }
+
+      this.$nextTick(() => {
+        // force relayout so the animation will run
+        this.__ = this.el.scrollHeight
+
+        this.style = {
+          height: afterRelayout(),
+          overflow: 'hidden',
+          'transition-property': 'height',
+          'transition-duration': this.duration + 'ms'
+        }
+      })
     }
   }
 }

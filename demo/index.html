@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Vue Slide Up Down Example</title>
-  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.18/dist/vue.js"></script>
   <script type="text/javascript" src="../dist/vue-slide-up-down.umd.js"></script>
 
   <script type="text/javascript">
@@ -15,7 +15,8 @@
 
         data: () => ({
           active: true,
-          show: true
+          show: true,
+          contentLength: 2
         }),
 
         methods: {
@@ -25,6 +26,18 @@
 
           toggleShow () {
             this.show = !this.show
+          },
+
+          addContent () {
+            this.contentLength += 1
+          }
+        },
+
+        computed: {
+          content () {
+            const content = new Array(this.contentLength)
+            content.fill('Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut, consequatur ut magnam, quos possimus, velit quam mollitia voluptate adipisci reiciendis sapiente accusamus ullam ab voluptatem laborum non! Accusamus, ullam, voluptatum.')
+            return content
           }
         }
       })
@@ -78,12 +91,14 @@
 
       <slide-up-down :active="active" class="AccordeonWrapper">
         <div class="Accordeon">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut, consequatur ut magnam, quos possimus, velit quam mollitia voluptate adipisci reiciendis sapiente accusamus ullam ab voluptatem laborum non! Accusamus, ullam, voluptatum.
+          <p v-for="paragraph in content">{{paragraph}}</p>
         </div>
       </slide-up-down>
 
       <br>
     </div>
+
+    <button class="Button" @click="addContent">Add Content</button>
 
     <button class="Button" @click="toggleShow">Toggle Destruction</button>
   </div>

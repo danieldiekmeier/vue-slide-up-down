@@ -8,7 +8,8 @@
   "umd:main": "dist/vue-slide-up-down.umd.js",
   "module": "dist/vue-slide-up-down.m.js",
   "scripts": {
-    "build": "microbundle"
+    "build": "microbundle",
+    "dev": "microbundle --watch"
   },
   "repository": {
     "type": "git",
@@ -26,6 +27,6 @@
   },
   "homepage": "https://github.com/danieldiekmeier/vue-slide-up-down#readme",
   "devDependencies": {
-    "microbundle": "^0.6.0"
+    "microbundle": "^0.8.3"
   }
 }

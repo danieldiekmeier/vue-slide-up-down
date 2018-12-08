@@ -4,6 +4,7 @@ Like jQuery's [`slideUp`](http://api.jquery.com/slideup/) / [`slideDown`](http:/
 
 Demo: https://codepen.io/danieldiekmeier/pen/YapGWq
 
+
 ## Installation
 
 ```sh
@@ -30,6 +31,7 @@ Or use the UMD build directly in your browser (the component is provided as `win
 </script>
 ```
 
+
 ## Usage
 
 The component takes three props:
@@ -49,25 +51,6 @@ The component takes three props:
 ```
 
 
-### Trigger a (re-)layout
-
-If you need to trigger a relayout (for example if your content changed), you can call the `.layout()` method on your slide-up-down instance:
-
-```html
-<slide-up-down ref="upDown">{{ myContent }}</slide-up-down>
-```
-
-And in your parent component:
-
-```js
-watch: {
-  myContent () {
-    this.$refs.upDown.layout()
-  }
-}
-```
-
-
 ### Custom `transition-timing-function`
 
 If you want to use a different timing function, add some CSS for your `<slide-up-down>` element. (See `demo/index.html` for a full example.)
@@ -83,6 +66,7 @@ If you want to use a different timing function, add some CSS for your `<slide-up
   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta omnis velit ab culpa, officia, unde nesciunt temporibus cum reiciendis distinctio.
 </slide-up-down>
 ```
+
 
 ### Listening for Events
 
