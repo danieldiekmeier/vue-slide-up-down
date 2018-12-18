@@ -10,11 +10,11 @@
     document.addEventListener('DOMContentLoaded', () => {
       Vue.component('slide-up-down', VueSlideUpDown);
 
-      new Vue({
+      window.root = new Vue({
         el: '#app',
 
         data: () => ({
-          active: true,
+          active: false,
           show: true,
           contentLength: 2
         }),
@@ -67,6 +67,8 @@
     }
 
     .AccordeonWrapper {
+      min-height: 40px;
+
       background-color: red;
 
       transition-timing-function: cubic-bezier(0.195, 1.650, 0.435, -0.600);

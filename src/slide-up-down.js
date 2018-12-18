@@ -14,16 +14,13 @@ export default {
   },
 
   data: () => ({
-    style: {}
+    style: {},
+    initial: false
   }),
 
   watch: {
     active () {
-      if (this.active) {
-        this.setHeight('0px', () => this.el.scrollHeight + 'px')
-      } else {
-        this.setHeight(this.el.scrollHeight + 'px', () => '0px')
-      }
+      this.layout()
     }
   },
 
@@ -43,9 +40,14 @@ export default {
       if (this.active) {
         this.style = {}
       } else {
-        this.style = { display: 'none' }
+        this.style = {
+          height: '0',
+          overflow: 'hidden'
+        }
       }
     })
+    this.layout()
+    this.initial = true
   },
 
   computed: {
@@ -55,10 +57,28 @@ export default {
   },
 
   methods: {
+    layout () {
+      if (this.active) {
+        if (this.initial) {
+          this.setHeight('0px', () => this.el.scrollHeight + 'px')
+        }
+      } else {
+        this.setHeight(this.el.scrollHeight + 'px', () => '0px')
+      }
+    },
+
+    asap (callback) {
+      if (!this.initial) {
+        callback()
+      } else {
+        this.$nextTick(callback)
+      }
+    },
+
     setHeight (temp, afterRelayout) {
       this.style = { height: temp }
 
-      this.$nextTick(() => {
+      this.asap(() => {
         // force relayout so the animation will run
         this.__ = this.el.scrollHeight
 
