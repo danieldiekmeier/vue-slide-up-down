@@ -70,7 +70,9 @@ If you want to use a different timing function, add some CSS for your `<slide-up
 
 ### Listening for Events
 
-To keep the codebase _small, but powerful™_, this package doesn't provide hooks for `transitionend`, `transitionstart` or other events, but instead provides direct access to the DOM Element that does the actual sliding up and down:
+The component emits four Vue events, `open-start`, `open-end`, `close-start`, `close-end`. E.g. `<vue-slide-up-down @close-end="console.log('done closing!')" ...`
+
+Alternatively, one can also add a ref and listen for the `transitionend` event.
 
 Add a [`ref`](https://vuejs.org/v2/api/#vm-refs) to your SlideUpDown-Element:
 
