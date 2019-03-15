@@ -50,6 +50,16 @@ The component takes three props:
 </div>
 ```
 
+The component emits four Vue events: 
+
+- `open-start`
+- `open-end`
+- `close-start`
+- `close-end`
+
+```html
+<slide-up-down @close-end="console.log('done closing!')" />
+```
 
 ### Custom `transition-timing-function`
 
@@ -65,13 +75,4 @@ If you want to use a different timing function, add some CSS for your `<slide-up
 <slide-up-down class="wobbly-accordeon">
   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta omnis velit ab culpa, officia, unde nesciunt temporibus cum reiciendis distinctio.
 </slide-up-down>
-```
-
-
-### Listening for Events
-
-The component emits four Vue events, `open-start`, `open-end`, `close-start`, `close-end`:
-
-```html
-<slide-up-down @close-end="console.log('done closing!')" />
 ```
