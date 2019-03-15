@@ -13,11 +13,13 @@ export default {
     }
   },
 
-  data: () => ({
-    style: {},
-    initial: false,
-    hidden: !this.active
-  }),
+  data () {
+    return {
+      style: {},
+      initial: false,
+      hidden: !this.active
+    }
+  },
 
   watch: {
     active () {
