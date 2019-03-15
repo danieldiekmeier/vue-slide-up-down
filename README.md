@@ -72,6 +72,6 @@ If you want to use a different timing function, add some CSS for your `<slide-up
 
 The component emits four Vue events, `open-start`, `open-end`, `close-start`, `close-end`:
 
-```
-  <slide-up-down @close-end="console.log('done closing!')" />
+```html
+<slide-up-down @close-end="console.log('done closing!')" />
 ```
