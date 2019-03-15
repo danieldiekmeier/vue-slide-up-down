@@ -16,7 +16,6 @@ export default {
   data: () => ({
     style: {},
     initial: false,
-    hidden: !this.active
   }),
 
   watch: {
@@ -31,7 +30,7 @@ export default {
       {
         style: this.style,
         ref: 'container',
-        attrs: { hidden: this.hidden },
+        attrs: { 'aria-hidden': !this.active },
         on: { transitionend: this.onTransitionEnd }
       },
       this.$slots.default
@@ -52,7 +51,6 @@ export default {
   methods: {
     layout () {
       if (this.active) {
-        this.hidden = false
         this.$emit('open-start')
         if (this.initial) {
           this.setHeight('0px', () => this.el.scrollHeight + 'px')
@@ -96,7 +94,6 @@ export default {
           height: '0',
           overflow: 'hidden'
         }
-        this.hidden = true
         this.$emit('close-end')
       }
     }
