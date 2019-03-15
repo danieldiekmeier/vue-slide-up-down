@@ -15,7 +15,8 @@ export default {
 
   data: () => ({
     style: {},
-    initial: false
+    initial: false,
+    hidden: !this.active
   }),
 
   watch: {
@@ -29,23 +30,15 @@ export default {
       this.tag,
       {
         style: this.style,
-        ref: 'container'
+        ref: 'container',
+        attrs: { hidden: this.hidden },
+        on: { transitionend: this.onTransitionEnd }
       },
       this.$slots.default
     )
   },
 
   mounted () {
-    this.el.addEventListener('transitionend', () => {
-      if (this.active) {
-        this.style = {}
-      } else {
-        this.style = {
-          height: '0',
-          overflow: 'hidden'
-        }
-      }
-    })
     this.layout()
     this.initial = true
   },
@@ -59,10 +52,13 @@ export default {
   methods: {
     layout () {
       if (this.active) {
+        this.hidden = false
+        this.$emit('open-start')
         if (this.initial) {
           this.setHeight('0px', () => this.el.scrollHeight + 'px')
         }
       } else {
+        this.$emit('close-start')
         this.setHeight(this.el.scrollHeight + 'px', () => '0px')
       }
     },
@@ -89,6 +85,20 @@ export default {
           'transition-duration': this.duration + 'ms'
         }
       })
+    },
+
+    onTransitionEnd () {
+      if (this.active) {
+        this.style = {}
+        this.$emit('open-end')
+      } else {
+        this.style = {
+          height: '0',
+          overflow: 'hidden'
+        }
+        this.hidden = true
+        this.$emit('close-end')
+      }
     }
   }
 }
