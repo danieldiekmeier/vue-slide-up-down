@@ -16,6 +16,7 @@ export default {
   data: () => ({
     style: {},
     initial: false,
+    hidden: false
   }),
 
   watch: {
@@ -26,20 +27,28 @@ export default {
 
   render (h) {
     return h(
-      this.tag,
-      {
-        style: this.style,
-        ref: 'container',
-        attrs: { 'aria-hidden': !this.active },
-        on: { transitionend: this.onTransitionEnd }
-      },
-      this.$slots.default
+        this.tag,
+        {
+          style: this.style,
+          ref: 'container',
+          attrs: {
+            hidden: this.hidden,
+            'aria-hidden': !this.active
+          },
+          on: { transitionend: this.onTransitionEnd }
+        },
+        this.$slots.default
     )
   },
 
   mounted () {
     this.layout()
     this.initial = true
+  },
+
+  created ()
+  {
+    this.hidden = !this.active;
   },
 
   computed: {
@@ -51,6 +60,7 @@ export default {
   methods: {
     layout () {
       if (this.active) {
+        this.hidden = false;
         this.$emit('open-start')
         if (this.initial) {
           this.setHeight('0px', () => this.el.scrollHeight + 'px')
@@ -94,6 +104,7 @@ export default {
           height: '0',
           overflow: 'hidden'
         }
+        this.hidden = true;
         this.$emit('close-end')
       }
     }
