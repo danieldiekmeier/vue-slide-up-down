@@ -1,108 +1,256 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Vue Slide Up Down Example</title>
-  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.18/dist/vue.js"></script>
-  <script type="text/javascript" src="../dist/vue-slide-up-down.umd.js"></script>
+    <meta charset="UTF-8">
+    <title>Vue Slide Up Down Example</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.18/dist/vue.js"></script>
+    <script type="text/javascript" src="../dist/vue-slide-up-down.umd.js"></script>
 
-  <script type="text/javascript">
-    document.addEventListener('DOMContentLoaded', () => {
-      Vue.component('slide-up-down', VueSlideUpDown);
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', () => {
+            Vue.component('slide-up-down', VueSlideUpDown);
 
-      window.root = new Vue({
-        el: '#app',
+            window.root = new Vue({
+                el: '#app',
 
-        data: () => ({
-          active: false,
-          show: true,
-          contentLength: 2
-        }),
+                data: () => ({
+                    active: false,
+                    show: true,
+                    contentLength: 2,
 
-        methods: {
-          toggle () {
-            this.active = !this.active
-          },
+                    showOptions: false,
+                    useHidden: true,
+                    timing: '',
+                    duration: 500
+                }),
 
-          toggleShow () {
-            this.show = !this.show
-          },
+                methods: {
+                    toggle: function () {
+                        this.active = !this.active
+                    },
 
-          addContent () {
-            this.contentLength += 1
-          }
-        },
+                    toggleShow: function () {
+                        this.show = !this.show
+                    },
 
-        computed: {
-          content () {
-            const content = new Array(this.contentLength)
-            content.fill('Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut, consequatur ut magnam, quos possimus, velit quam mollitia voluptate adipisci reiciendis sapiente accusamus ullam ab voluptatem laborum non! Accusamus, ullam, voluptatum.')
-            return content
-          }
+                    toggleShowOptions: function () {
+                        this.showOptions = !this.showOptions
+                    },
+
+                    addContent: function () {
+                        this.contentLength += 1
+                    }
+                },
+
+                watch: {
+                    duration: function () {
+                        this.duration = parseInt(this.duration);
+                    }
+                },
+
+                computed: {
+                    content: function () {
+                        const content = new Array(this.contentLength)
+                        content.fill('Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut, consequatur ut magnam, quos possimus, velit quam mollitia voluptate adipisci reiciendis sapiente accusamus ullam ab voluptatem laborum non! Accusamus, ullam, voluptatum.')
+                        return content
+                    }
+                }
+            })
+        })
+    </script>
+
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            font-size: 1em;
+            box-sizing: border-box;
         }
-      })
-    })
-  </script>
 
-  <style type="text/css">
-    * {
-      margin: 0;
-      padding: 0;
-      font-size: 1em;
-      box-sizing: border-box;
-    }
+        body {
+            font-family: sans-serif;
+            padding: 20px;
+        }
 
-    body {
-      font-family: sans-serif;
-    }
+        #app {
+            margin: 0 auto;
+            max-width: 700px;
+        }
 
-    .Button {
-      display: block;
-      width: 50%;
-      margin-left: auto;
-      margin-right: auto;
-      padding: 1em;
-      border: 0;
-      background-color: gray;
-    }
+        .Button {
+            display: block;
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 1em;
+            border: 0;
+            background-color: gray;
+            cursor:pointer;
+        }
 
-    .AccordeonWrapper {
-      min-height: 40px;
+        .Button.small {
+            width: auto;
+            font-size: 0.8em;
+            padding: 0.5em 1em;
+            background-color: lightgray;
+            margin: 0;
+        }
 
-      background-color: red;
+        .AccordionWrapper {
+            background-color: darkred;
+        }
 
-      transition-timing-function: cubic-bezier(0.195, 1.650, 0.435, -0.600);
-    }
+        .AccordionWrapper.easeInOutCirc {
+            transition-timing-function: cubic-bezier(0.785, 0.135, 0.15, 0.86);
+        }
 
-    .Accordeon {
-      display: block;
-      width: 50%;
-      margin-left: auto;
-      margin-right: auto;
-      padding: 1em;
-      border: 0;
-      background-color: lightgray;
-    }
-  </style>
+        .AccordionWrapper.customTiming {
+            transition-timing-function: cubic-bezier(0.195, 1.650, 0.435, -0.600);
+        }
+
+        .Accordion {
+            display: block;
+            width: 96%;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 1em;
+            border: 0;
+            background-color: lightgray;
+        }
+
+        .Accordion p, .Accordion hr {
+            margin-bottom: 10px;
+        }
+
+        .Accordion p:last-child {
+            margin-bottom: 0;
+        }
+
+        .options {
+            padding: 20px 0;
+        }
+
+        .options h1 {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+
+        .options h1:first-child {
+            margin-top: 0;
+        }
+
+        .options h2 {
+            margin-top: 20px;
+            margin-bottom: 6px;
+            font-size: 14px;
+        }
+
+        .options span, .options p, .options ul, .options label {
+            font-size: 0.8em;
+        }
+
+        .options p, .options ul {
+            margin-bottom: 10px;
+            margin-top: 6px;
+        }
+
+        .options ul {
+            margin-left: 20px;
+        }
+
+        .properties {
+            font-style: italic;
+        }
+    </style>
 </head>
 
 <body>
-  <div id="app">
-    <div v-if="show">
-      <button @click="toggle" class="Button">Toggle</button>
+<div id="app">
 
-      <slide-up-down :active="active" class="AccordeonWrapper">
-        <div class="Accordeon">
-          <p v-for="paragraph in content">{{paragraph}}</p>
+    <button @click="toggleShowOptions" class="Button small">Toggle Options</button>
+    <slide-up-down :active="showOptions">
+        <div class="options">
+            <h1>Vue props</h1>
+            <h2>active</h2>
+            <p class="properties">Boolean. Required.</p>
+            <p>Whether to show the component (true) or not (false).</p>
+
+            <h2>duration</h2>
+            <p class="properties">Number. Optional. Default to "500"</p>
+            <label for="duration">How long the animation is supposed to be, in milliseconds.</label>
+            <div>
+                <input type="range" min="0" max="10000" step="500" id="duration" v-model="duration">
+                <span>{{ this.duration }}ms</span>
+            </div>
+
+            <h2>tag</h2>
+            <p class="properties">String. Optional. Default to "div".</p>
+            <p>Which HTML tag to use for the wrapper element.</p>
+
+            <h2>use-hidden</h2>
+            <p class="properties">Boolean. Optional. Default to "true".</p>
+            <p>Whether to apply the "hidden" attribute to the element when closed.</p>
+            <p>By default, when closed, the "hidden" attribute is applied to the component. This hides the component from the
+                screen and from assistive devices. The internal elements of the component are completely invisible, and cannot be
+                focused on (by a keyboard or assistive device).</p>
+            <p>If you need, set this property to "false" to not use the "hidden" attribute. This could be used if you wanted
+                to have a min-height requirement on your component.
+                <strong>Note that this can create accessibility issues</strong>,
+                specifically for users with a keyboard or screen reader. Even though the component may appear hidden,
+                focusable elements within the component are still able to be accessed through keyboard navigation.</p>
+            <input type="checkbox" value="1" id="applyHiddenToElement" name="useHidden" v-model="useHidden">
+            <label for="applyHiddenToElement">Apply "hidden" attribute to element?</label>
+
+            <h1>Customisation</h1>
+            <h2>CSS custom timing</h2>
+            <p>By default, the timing of the animation is linear.</p>
+            <p>You can define your own custom timing functions too using the CSS transition timing function property.</p>
+            <p>Check out the source code to see the easeOutCubic and customTiming example code.</p>
+            <div>
+                <input type="radio" name="timing" value="" id="radio-default" v-model="timing">
+                <label for="radio-default">Default</label>
+            </div>
+            <div>
+                <input type="radio" name="timing" value="easeInOutCirc" id="radio-ease-out" v-model="timing">
+                <label for="radio-ease-out">Use easeInOutCirc</label>
+            </div>
+            <div>
+                <input type="radio" name="timing" value="customTiming" id="radio-custom" v-model="timing">
+                <label for="radio-custom">Use custom timing</label>
+            </div>
         </div>
-      </slide-up-down>
+    </slide-up-down>
 
-      <br>
+    <div class="options">
+        <h1>Current configuration</h1>
+        <p>These are the current configuration options being passed to the Toggle-able component below.</p>
+        <p>Toggle the options above to make changes to see changes in realtime.</p>
+        <ul>
+            <li><em>duration:</em> {{ this.duration }}</li>
+            <li><em>use-hidden:</em> {{ this.useHidden }}</li>
+            <li><em>class:</em> {{ this.timing }}</li>
+        </ul>
+    </div>
+    <div v-if="show">
+        <button @click="toggle" class="Button">Toggle Content</button>
+
+        <slide-up-down class="AccordionWrapper" :active="active" :use-hidden="this.useHidden" :class="this.timing" :duration="this.duration">
+            <div class="Accordion">
+                <p>
+                    <label for="input-focus-test">Focusable element</label>
+                    <input id="input-focus-test">
+                </p>
+                <hr>
+                <p v-for="paragraph in content">{{paragraph}}</p>
+            </div>
+        </slide-up-down>
+
+        <br>
+
+        <button class="Button" @click="addContent">Add Content</button>
     </div>
 
-    <button class="Button" @click="addContent">Add Content</button>
-
     <button class="Button" @click="toggleShow">Toggle Destruction</button>
-  </div>
+</div>
 </body>
 </html>

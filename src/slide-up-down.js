@@ -10,6 +10,10 @@ export default {
     tag: {
       type: String,
       default: 'div'
+    },
+    useHidden: {
+      type: Boolean,
+      default: true
     }
   },
 
@@ -22,19 +26,29 @@ export default {
   watch: {
     active () {
       this.layout()
-    }
+    }, useHidden (){console.log('useHidden is ' + this.useHidden)}
   },
 
   render (h) {
+    // define the attributes to use
+    let attrs = {
+      hidden: this.hidden,
+      'aria-hidden': !this.active,
+      'aria-expanded': this.active
+    };
+
+    if (!this.useHidden)
+    {
+      delete attrs.hidden;
+    }
+
+    // render the component
     return h(
         this.tag,
         {
           style: this.style,
           ref: 'container',
-          attrs: {
-            hidden: this.hidden,
-            'aria-hidden': !this.active
-          },
+          attrs: attrs,
           on: { transitionend: this.onTransitionEnd }
         },
         this.$slots.default
