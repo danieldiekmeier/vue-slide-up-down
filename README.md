@@ -34,11 +34,12 @@ Or use the UMD build directly in your browser (the component is provided as `win
 
 ## Usage
 
-The component takes three props:
+The component takes four props:
 
-- `active` (Boolean): Whether to show the component (`true`) or not (`false`)
-- `duration` (Number): How long the animation is supposed to be, in milliseconds. Defaults to `500`.
-- `tag` (String): Which HTML tag to use for the wrapper element. Defaults to `div`.
+- `active` (Boolean, required): Whether to show the component (`true`) or not (`false`)
+- `duration` (Number, optional): How long the animation is supposed to be, in milliseconds. Defaults to `500`.
+- `tag` (String, optional): Which HTML tag to use for the wrapper element. Defaults to `div`.
+- `use-hidden` (Boolean, optional): Use the "hidden" attribute when closed. Defaults to `true`. Setting to `false` creates accessibility issues. See `demo/index.html` for more detail.
 
 ```html
 <div class="MyContent">
@@ -67,12 +68,12 @@ If you want to use a different timing function, add some CSS for your `<slide-up
 
 ```html
 <style>
-  .wobbly-accordeon {
+  .wobbly-accordion {
     transition-timing-function: cubic-bezier(0.195, 1.650, 0.435, -0.600);
   }
 </style>
 
-<slide-up-down class="wobbly-accordeon">
+<slide-up-down class="wobbly-accordion">
   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta omnis velit ab culpa, officia, unde nesciunt temporibus cum reiciendis distinctio.
 </slide-up-down>
 ```
