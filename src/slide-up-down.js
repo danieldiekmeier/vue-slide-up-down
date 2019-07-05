@@ -5,76 +5,74 @@ export default {
     active: Boolean,
     duration: {
       type: Number,
-      default: 500
+      default: 500,
     },
     tag: {
       type: String,
-      default: 'div'
+      default: 'div',
     },
     useHidden: {
       type: Boolean,
-      default: true
-    }
+      default: true,
+    },
   },
 
   data: () => ({
     style: {},
     initial: false,
-    hidden: false
+    hidden: false,
   }),
 
   watch: {
-    active () {
+    active() {
       this.layout()
-    }
+    },
   },
 
-  render (h) {
+  render(h) {
     // define the attributes to use
     let attrs = {
       hidden: this.hidden,
       'aria-hidden': !this.active,
-      'aria-expanded': this.active
-    };
+      'aria-expanded': this.active,
+    }
 
-    if (!this.useHidden)
-    {
-      delete attrs.hidden;
+    if (!this.useHidden) {
+      delete attrs.hidden
     }
 
     // render the component
     return h(
-        this.tag,
-        {
-          style: this.style,
-          ref: 'container',
-          attrs: attrs,
-          on: { transitionend: this.onTransitionEnd }
-        },
-        this.$slots.default
+      this.tag,
+      {
+        style: this.style,
+        ref: 'container',
+        attrs: attrs,
+        on: { transitionend: this.onTransitionEnd },
+      },
+      this.$slots.default
     )
   },
 
-  mounted () {
+  mounted() {
     this.layout()
     this.initial = true
   },
 
-  created ()
-  {
-    this.hidden = !this.active;
+  created() {
+    this.hidden = !this.active
   },
 
   computed: {
-    el () {
+    el() {
       return this.$refs.container
-    }
+    },
   },
 
   methods: {
-    layout () {
+    layout() {
       if (this.active) {
-        this.hidden = false;
+        this.hidden = false
         this.$emit('open-start')
         if (this.initial) {
           this.setHeight('0px', () => this.el.scrollHeight + 'px')
@@ -85,7 +83,7 @@ export default {
       }
     },
 
-    asap (callback) {
+    asap(callback) {
       if (!this.initial) {
         callback()
       } else {
@@ -93,7 +91,7 @@ export default {
       }
     },
 
-    setHeight (temp, afterRelayout) {
+    setHeight(temp, afterRelayout) {
       this.style = { height: temp }
 
       this.asap(() => {
@@ -104,23 +102,23 @@ export default {
           height: afterRelayout(),
           overflow: 'hidden',
           'transition-property': 'height',
-          'transition-duration': this.duration + 'ms'
+          'transition-duration': this.duration + 'ms',
         }
       })
     },
 
-    onTransitionEnd () {
+    onTransitionEnd() {
       if (this.active) {
         this.style = {}
         this.$emit('open-end')
       } else {
         this.style = {
           height: '0',
-          overflow: 'hidden'
+          overflow: 'hidden',
         }
-        this.hidden = true;
+        this.hidden = true
         this.$emit('close-end')
       }
-    }
-  }
+    },
+  },
 }

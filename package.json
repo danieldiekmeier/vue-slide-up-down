@@ -7,9 +7,20 @@
   "main": "dist/vue-slide-up-down.js",
   "umd:main": "dist/vue-slide-up-down.umd.js",
   "module": "dist/vue-slide-up-down.m.js",
+  "files": [
+    "dist"
+  ],
+  "prettier": {
+    "trailingComma": "es5",
+    "tabWidth": 2,
+    "semi": false,
+    "singleQuote": true
+  },
   "scripts": {
     "build": "microbundle",
-    "dev": "microbundle --watch"
+    "dev": "microbundle --watch",
+    "prettier": "prettier --write src/*",
+    "prepublish": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -27,6 +38,7 @@
   },
   "homepage": "https://github.com/danieldiekmeier/vue-slide-up-down#readme",
   "devDependencies": {
-    "microbundle": "^0.8.3"
+    "microbundle": "^0.11.0",
+    "prettier": "^1.18.2"
   }
 }
