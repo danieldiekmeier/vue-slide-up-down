@@ -26,7 +26,7 @@ export default {
   watch: {
     active () {
       this.layout()
-    }, useHidden (){console.log('useHidden is ' + this.useHidden)}
+    }
   },
 
   render (h) {
