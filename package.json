@@ -19,7 +19,7 @@
   "scripts": {
     "build": "microbundle",
     "dev": "microbundle --watch",
-    "prettier": "prettier --write src/*",
+    "prettier": "prettier --write src/* demo/*",
     "prepublish": "npm run build"
   },
   "repository": {
