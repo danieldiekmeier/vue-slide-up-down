@@ -30,24 +30,12 @@ export default {
   },
 
   render(h) {
-    // define the attributes to use
-    let attrs = {
-      hidden: this.hidden,
-      'aria-hidden': !this.active,
-      'aria-expanded': this.active,
-    }
-
-    if (!this.useHidden) {
-      delete attrs.hidden
-    }
-
-    // render the component
     return h(
       this.tag,
       {
         style: this.style,
+        attrs: this.attrs,
         ref: 'container',
-        attrs: attrs,
         on: { transitionend: this.onTransitionEnd },
       },
       this.$slots.default
@@ -66,6 +54,19 @@ export default {
   computed: {
     el() {
       return this.$refs.container
+    },
+
+    attrs() {
+      const attrs = {
+        'aria-hidden': !this.active,
+        'aria-expanded': this.active,
+      }
+
+      if (this.useHidden) {
+        attrs.hidden = this.hidden
+      }
+
+      return attrs
     },
   },
 
