@@ -43,6 +43,7 @@ The component takes four props:
 - `active` (Boolean, required): Whether to show the component (`true`) or not (`false`)
 - `duration` (Number, optional): How long the animation is supposed to be, in milliseconds. Defaults to `500`.
 - `tag` (String, optional): Which HTML tag to use for the wrapper element. Defaults to `div`.
+- `active` (Boolean, optional): Disable slide-up-down. Defaults to `false`
 - `use-hidden` (Boolean, optional): Whether to apply the "hidden" attribute to the element when closed. Defaults to `true`. This hides the component from the screen and from assistive devices. The internal elements of the component are completely invisible, and cannot be focused on (by a keyboard or assistive device). (This is probably what you want!) If you need, set this property to `false` to not use the `hidden` attribute. This could be used if you wanted to have a min-height requirement on your component. **⚠️ Note that this can create accessibility issues**, specifically for users with a keyboard or screen reader. Even though the component may _appear_ hidden, focusable elements within the component are still able to be accessed through keyboard navigation.
 
 ```html
