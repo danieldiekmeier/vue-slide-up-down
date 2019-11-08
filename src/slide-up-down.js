@@ -15,6 +15,10 @@ export default {
       type: Boolean,
       default: true,
     },
+    disabled: {
+      type: Boolean,
+      default: false
+    },
   },
 
   data: () => ({
@@ -33,7 +37,7 @@ export default {
     return h(
       this.tag,
       {
-        style: this.style,
+        style: this.renderStyle,
         attrs: this.attrs,
         ref: 'container',
         on: { transitionend: this.onTransitionEnd },
@@ -66,8 +70,11 @@ export default {
         attrs.hidden = this.hidden
       }
 
-      return attrs
+      return !this.disabled ? attrs : {}
     },
+    renderStyle() {
+      return !this.disabled ? this.style : {}
+    }
   },
 
   methods: {
