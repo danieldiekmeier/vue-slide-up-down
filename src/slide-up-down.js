@@ -108,7 +108,10 @@ export default {
       })
     },
 
-    onTransitionEnd() {
+    onTransitionEnd(event) {
+      // Don't do anything if the transition doesn't belong to the container
+      if (event.target !== this.el) return
+
       if (this.active) {
         this.style = {}
         this.$emit('open-end')
