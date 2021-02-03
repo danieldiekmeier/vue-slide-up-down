@@ -8,7 +8,8 @@
   "umd:main": "dist/vue-slide-up-down.umd.js",
   "module": "dist/vue-slide-up-down.m.js",
   "files": [
-    "dist"
+    "dist",
+    "vue3"
   ],
   "prettier": {
     "trailingComma": "es5",
