@@ -1,6 +1,6 @@
 # vue-slide-up-down
 
-Like jQuery's [`slideUp`](http://api.jquery.com/slideup/) / [`slideDown`](http://api.jquery.com/slidedown/), but for [Vue](vuejs.org)!
+Like jQuery's [`slideUp`](http://api.jquery.com/slideup/) / [`slideDown`](http://api.jquery.com/slidedown/), but for [Vue](https://vuejs.org)!
 
 Demo: https://codepen.io/danieldiekmeier/pen/YapGWq
 
