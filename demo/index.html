@@ -95,7 +95,8 @@
       margin-right: auto;
       padding: 1em;
       border: 0;
-      background-color: gray;
+      background-color: #34495e;
+      color: white;
       cursor: pointer;
     }
 
@@ -104,11 +105,12 @@
       font-size: 0.8em;
       padding: 0.5em 1em;
       background-color: lightgray;
+      color: black;
       margin: 0;
     }
 
     .AccordionWrapper {
-      background-color: darkred;
+      background-color: #41b883;
     }
 
     .AccordionWrapper.easeInOutCirc {
@@ -126,7 +128,7 @@
       margin-right: auto;
       padding: 1em;
       border: 0;
-      background-color: lightgray;
+      background-color: #f3f3f3;
     }
 
     .Accordion p,
@@ -216,24 +218,7 @@
           <p class="properties">Boolean. Optional. Default to "true".</p>
           <p>
             Whether to apply the "hidden" attribute to the element when
-            closed.
-          </p>
-          <p>
-            By default, when closed, the "hidden" attribute is applied to the
-            component. This hides the component from the screen and from
-            assistive devices. The internal elements of the component are
-            completely invisible, and cannot be focused on (by a keyboard or
-            assistive device).
-          </p>
-          <p>
-            If you need, set this property to "false" to not use the "hidden"
-            attribute. This could be used if you wanted to have a min-height
-            requirement on your component.
-            <strong>Note that this can create accessibility issues</strong>,
-            specifically for users with a keyboard or screen reader. Even
-            though the component may appear hidden, focusable elements within
-            the component are still able to be accessed through keyboard
-            navigation.
+            closed. Note that this can create accessibility issues. Learn more in the README.md.
           </p>
           <input type="checkbox" value="1" id="applyHiddenToElement" name="useHidden" v-model="useHidden" />
           <label for="applyHiddenToElement">
@@ -294,7 +279,7 @@
       >
         <div class="Accordion">
           <p>
-            <label for="input-focus-test">Focusable element is not focusable when the slide is closed:</label>
+            <label for="input-focus-test">Focusable element is not focusable when the slide is closed and `use-hidden` is true:</label>
             <input id="input-focus-test" />
           </p>
           <hr />
@@ -305,9 +290,10 @@
       <br />
 
       <button class="Button" @click="addContent">Add Content</button>
+      <br />
     </div>
 
-    <button class="Button" @click="toggleShow">Toggle existance of element</button>
+    <button class="Button" @click="toggleShow">Toggle existence of element</button>
   </div>
 </body>
 </html>
