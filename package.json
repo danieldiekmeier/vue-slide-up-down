@@ -1,26 +1,20 @@
 {
   "name": "vue-slide-up-down",
-  "version": "2.0.1",
+  "version": "3.0.0-next.0",
   "description": "Like jQuery's slideUp/slideDown, but for Vue!",
   "source": "src/slide-up-down.js",
-  "amdName": "VueSlideUpDown",
-  "main": "dist/vue-slide-up-down.js",
-  "umd:main": "dist/vue-slide-up-down.umd.js",
-  "module": "dist/vue-slide-up-down.m.js",
+  "main": "src/vue-slide-up-down.js",
+  "module": "src/vue-slide-up-down.js",
   "files": [
-    "dist"
+    "src"
   ],
   "prettier": {
-    "trailingComma": "es5",
-    "tabWidth": 2,
+    "trailingComma": "all",
     "semi": false,
-    "singleQuote": true
+    "singleQuote": false
   },
   "scripts": {
-    "build": "microbundle",
-    "dev": "microbundle --watch",
-    "prettier": "prettier --write src/* demo/*",
-    "prepublish": "npm run build"
+    "prettier": "prettier --write src/* demo/*"
   },
   "repository": {
     "type": "git",
@@ -29,7 +23,8 @@
   "keywords": [
     "vue",
     "slideup",
-    "slidedown"
+    "slidedown",
+    "slidetoggle"
   ],
   "author": "Daniel Diekmeier",
   "license": "MIT",
@@ -37,8 +32,10 @@
     "url": "https://github.com/danieldiekmeier/vue-slide-up-down/issues"
   },
   "homepage": "https://github.com/danieldiekmeier/vue-slide-up-down#readme",
+  "peerDependencies": {
+    "vue": ">=3.0.0"
+  },
   "devDependencies": {
-    "microbundle": "^0.11.0",
-    "prettier": "^1.19.1"
+    "prettier": "^3.1.0"
   }
 }

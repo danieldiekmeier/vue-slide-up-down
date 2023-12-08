@@ -1,3 +1,5 @@
+import { h } from 'vue'
+
 export default {
   name: 'SlideUpDown',
 
@@ -29,16 +31,16 @@ export default {
     },
   },
 
-  render(h) {
+  render() {
     return h(
       this.tag,
       {
+        ...this.attrs,
         style: this.style,
-        attrs: this.attrs,
         ref: 'container',
-        on: { transitionend: this.onTransitionEnd },
+        onTransitionend: this.onTransitionEnd,
       },
-      this.$slots.default
+      this.$slots.default()
     )
   },
 

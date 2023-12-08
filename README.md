@@ -1,6 +1,6 @@
 # vue-slide-up-down
 
-Like jQuery's [`slideUp`](http://api.jquery.com/slideup/) / [`slideDown`](http://api.jquery.com/slidedown/), but for [Vue](https://vuejs.org)!
+Like jQuery's [`slideUp`](http://api.jquery.com/slideup/) / [`slideDown`](http://api.jquery.com/slidedown/) / [`slideToggle`], but for [Vue](https://vuejs.org)!
 
 Demo: https://codepen.io/danieldiekmeier/pen/YapGWq
 
@@ -10,40 +10,18 @@ Demo: https://codepen.io/danieldiekmeier/pen/YapGWq
 npm i vue-slide-up-down
 ```
 
-Usage with Webpack or other module bundlers:
-
 ```js
+import { createApp } from 'vue'
 import SlideUpDown from 'vue-slide-up-down'
-// or
-const SlideUpDown = require('vue-slide-up-down')
 
-Vue.component('slide-up-down', SlideUpDown)
+const app = createApp({ ... })
+app.component('slide-up-down', SlideUpDown)
 ```
 
-Or use the UMD build directly in your browser (the component is provided as `window.VueSlideUpDown`).
-
-```html
-<script
-  type="text/javascript"
-  src="node_modules/vuejs/dist/vue.min.js"
-></script>
-<script
-  type="text/javascript"
-  src="node_modules/vue-slide-up-down/dist/vue-slide-up-down.umd.js"
-></script>
-<script type="text/javascript">
-  Vue.component('slide-up-down', VueSlideUpDown)
-</script>
-```
+> [!NOTE]
+> Version 3 of this package is only compatible with Vue 3. If you're still on Vue 2, install the previous version with `npm i vue-slide-up-down@2`
 
 ## Usage
-
-The component takes four props:
-
-- `active` (Boolean, required): Whether to show the component (`true`) or not (`false`)
-- `duration` (Number, optional): How long the animation is supposed to be, in milliseconds. Defaults to `500`.
-- `tag` (String, optional): Which HTML tag to use for the wrapper element. Defaults to `div`.
-- `use-hidden` (Boolean, optional): Whether to apply the "hidden" attribute to the element when closed. Defaults to `true`. This hides the component from the screen and from assistive devices. The internal elements of the component are completely invisible, and cannot be focused on (by a keyboard or assistive device). (This is probably what you want!) If you need, set this property to `false` to not use the `hidden` attribute. This could be used if you wanted to have a min-height requirement on your component. **⚠️ Note that this can create accessibility issues**, specifically for users with a keyboard or screen reader. Even though the component may _appear_ hidden, focusable elements within the component are still able to be accessed through keyboard navigation.
 
 ```html
 <div class="MyContent">
@@ -55,7 +33,18 @@ The component takes four props:
 </div>
 ```
 
-The component emits four Vue events:
+The component takes four props:
+
+- `active` (Boolean, required): Whether to show the component (`true`) or not (`false`)
+- `duration` (Number, optional): How long the animation is supposed to be, in milliseconds. Defaults to `500`.
+- `tag` (String, optional): Which HTML tag to use for the wrapper element. Defaults to `div`.
+- `use-hidden` (Boolean, optional): Whether to apply the `hidden` attribute to the element when closed. Defaults to `true`. This hides the component from the screen and from assistive devices. The internal elements of the component are completely invisible, and can't be focused (by a keyboard or assistive device). (This is probably what you want!)
+
+  If you really need to, you can set this property to `false` to _not_ use the `hidden` attribute. For example if you want to have a `min-height` on your component and not actually transition to a height of `0`.
+
+  **⚠️ Be aware that this can create accessibility issues**, specifically for users with a keyboard or screen reader. Even though the component may _appear_ hidden, focusable elements within the component are still able to be accessed through keyboard navigation.
+
+The component emits four events:
 
 - `open-start`
 - `open-end`
