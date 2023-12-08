@@ -1,7 +1,7 @@
-import { h } from 'vue'
+import { h } from "vue"
 
 export default {
-  name: 'SlideUpDown',
+  name: "SlideUpDown",
 
   props: {
     active: Boolean,
@@ -11,7 +11,7 @@ export default {
     },
     tag: {
       type: String,
-      default: 'div',
+      default: "div",
     },
     useHidden: {
       type: Boolean,
@@ -37,10 +37,10 @@ export default {
       {
         ...this.attrs,
         style: this.style,
-        ref: 'container',
+        ref: "container",
         onTransitionend: this.onTransitionEnd,
       },
-      this.$slots.default()
+      this.$slots.default(),
     )
   },
 
@@ -60,8 +60,8 @@ export default {
 
     attrs() {
       const attrs = {
-        'aria-hidden': !this.active,
-        'aria-expanded': this.active,
+        "aria-hidden": !this.active,
+        "aria-expanded": this.active,
       }
 
       if (this.useHidden) {
@@ -76,13 +76,13 @@ export default {
     layout() {
       if (this.active) {
         this.hidden = false
-        this.$emit('open-start')
+        this.$emit("open-start")
         if (this.initial) {
-          this.setHeight('0px', () => this.el.scrollHeight + 'px')
+          this.setHeight("0px", () => this.el.scrollHeight + "px")
         }
       } else {
-        this.$emit('close-start')
-        this.setHeight(this.el.scrollHeight + 'px', () => '0px')
+        this.$emit("close-start")
+        this.setHeight(this.el.scrollHeight + "px", () => "0px")
       }
     },
 
@@ -103,9 +103,9 @@ export default {
 
         this.style = {
           height: afterRelayout(),
-          overflow: 'hidden',
-          'transition-property': 'height',
-          'transition-duration': this.duration + 'ms',
+          overflow: "hidden",
+          "transition-property": "height",
+          "transition-duration": this.duration + "ms",
         }
       })
     },
@@ -116,14 +116,14 @@ export default {
 
       if (this.active) {
         this.style = {}
-        this.$emit('open-end')
+        this.$emit("open-end")
       } else {
         this.style = {
-          height: '0',
-          overflow: 'hidden',
+          height: "0",
+          overflow: "hidden",
         }
         this.hidden = true
-        this.$emit('close-end')
+        this.$emit("close-end")
       }
     },
   },
